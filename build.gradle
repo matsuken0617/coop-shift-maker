@@ -36,3 +36,8 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+war {
+    enabled = true
+    archiveName='coop-shift-maker.war' // <-ここはプロジェクトに合わせて書き換えてください
+}
