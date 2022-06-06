@@ -150,8 +150,6 @@ public class WorkShiftService {
         List<Worker> workers = wRepo.findAll();
         // カレンダー作成
         int[][] workCalendar = new int[workers.size()][(int) ChronoUnit.DAYS.between(startDt, endDt)];
-        System.out.println(workCalendar.length);
-        System.out.println(workCalendar[0].length);
         for (int i = 0; i < workers.size(); i++) {
             List<WorkShift> workShifts = wsRepo.findByWorkerIdAndDateBetween(workers.get(i).getId(), startDt,
                     endDt);
