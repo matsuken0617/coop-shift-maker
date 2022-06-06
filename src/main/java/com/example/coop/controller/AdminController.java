@@ -103,6 +103,7 @@ public class AdminController {
 
     /**
      * シフト作成の確認
+     * 
      * @param model
      * @return
      */
@@ -122,6 +123,7 @@ public class AdminController {
 
     /**
      * シフト作成
+     * 
      * @param model
      * @return
      * @throws ParseException
@@ -130,9 +132,18 @@ public class AdminController {
     String createShift(Model model) throws ParseException {
         // シフト作成
         /// 今の日付
-        LocalDate dt1 = LocalDate.of(2022, 4, 15);
-        LocalDate dt2 = LocalDate.of(2022, 5, 15);
-        wsService.updateShiftCalender(dt1, dt2);
+        // 日付を決める
+        LocalDate today = LocalDate.now();
+        LocalDate startDt;
+        LocalDate endDt;
+        if (today.getDayOfMonth() < 15) {
+            startDt = LocalDate.of(today.getYear(), today.getMonth(), 15);
+            endDt = LocalDate.of(today.plusMonths(1).getYear(), today.plusMonths(1).getMonth(), 15);
+        } else {
+            startDt = LocalDate.of(today.plusMonths(1).getYear(), today.plusMonths(1).getMonth(), 15);
+            endDt = LocalDate.of(today.plusMonths(2).getYear(), today.plusMonths(2).getMonth(), 15);
+        }
+        wsService.updateShiftCalender(startDt, endDt);
         return "redirect:/admin";
     }
 }
